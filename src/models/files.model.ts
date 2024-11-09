@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-// Define the File Schema
 interface IFile extends Document {
   name: string;
   tags: string[];
@@ -15,7 +14,6 @@ const fileSchema = new Schema<IFile>({
   createdAt: { type: Date, default: Date.now },
 });
 
-// Create a Mongoose model for File
 const File = mongoose.model<IFile>('File', fileSchema);
 
 export default File;

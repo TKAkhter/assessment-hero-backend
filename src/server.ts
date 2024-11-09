@@ -1,4 +1,4 @@
-import path from "node:path";
+import path from "path";
 
 import express, { Request, Response } from "express";
 import logger from "morgan";
@@ -38,7 +38,11 @@ app.use(cors);
 app.use(cookieParser());
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads'), {
+  setHeaders: (res, path) => {
+    console.log('Serving file:', path);
+  }
+}));
 app.use(compression());
 app.use(session({
   secret: process.env.SESSION_SECRET || 'supersecret',

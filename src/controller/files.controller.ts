@@ -62,15 +62,12 @@ export const viewFile = async (req: Request, res: Response) => {
 
 export const getAllFiles = async (req: Request, res: Response) => {
     try {
-        // Fetch all files from the database
         const files = await File.find();
 
-        // Check if there are no files
         if (files.length === 0) {
             return res.status(404).json({ message: 'No files found' });
         }
 
-        // Send all files as response
         return res.status(200).json({ files });
     } catch (err) {
         console.error('Error fetching files:', err);
